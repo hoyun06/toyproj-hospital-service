@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>이름</th>
+      <th>소속</th>
+      <th>연차</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doctor : ${doctors}">
+      <td th:text="${doctor.id}"></td>
+      <td th:text="${doctor.name}"></td>
+      <td th:text="${doctor.department.name}"></td>
+      <td th:text="${doctor.workYear}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-primary" href="/">메인 페이지</a>
+</div>
+</body>
+</html>

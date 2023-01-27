@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>진료과 이름</th>
+      <th>전화 번호</th>
+      <th>소속 의사</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="department : ${departments}">
+      <td th:text="${department.name}"></td>
+      <td th:text="${department.tel}"></td>
+      <td><a th:href="@{/department/detail(department_name = ${department.name})}">소속 의사 명단</a></td>
+    </tr>
+    </tbody>
+  </table>
+  <a class="btn btn-primary" href="/">메인 페이지</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+  <div th:replace="fragments/bodyHeader :: bodyHeader" />
+  <div class="container">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>이름</th>
+        <th>주소</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="hospital : ${hospitals}">
+        <td th:text="${hospital.id}"></td>
+        <td><a th:href="@{/hospital/detail(hospital_id = ${hospital.id})}" th:text="${hospital.name}"></a></td>
+        <td><span th:text = "${hospital.address.city}"></span><span th:text = "' ' + ${hospital.address.street}"></span><span th:text = "' ' + ${hospital.address.zipcode}"></span></td>
+      </tr>
+      </tbody>
+    </table>
+    <a class="btn btn-primary" href="/">메인 페이지</a>
+  </div>
+</body>
+</html>
