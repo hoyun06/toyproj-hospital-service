@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<div th:replace="fragments/bodyHeader :: bodyHeader"/>
+<div class="container">
+  <form role="form" th:action="@{/register/department}" method="get">
+    <div class="form-group">
+      <label for="hospital">병원</label>
+      <select name="hospital_id" id="hospital" class="form-control">
+        <option value="">병원선택</option>
+        <option th:each="hospital : ${hospitals}"
+                th:value="${hospital.id}"
+                th:text="${hospital.name}" />
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Next</button>
+  </form>
+  <br/>
+</div> <!-- /container -->
+</body>
+</html>

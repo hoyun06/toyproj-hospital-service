@@ -3,7 +3,9 @@ package toyproject.HospitalService.controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import toyproject.HospitalService.dto.DoctorForm;
@@ -24,5 +26,15 @@ public class DoctorController {
         doctorService.addDoctor(hospitalId, departmentName, doctorForm.getName(), doctorForm.getWorkYear());
 
         return "home";
+    }
+
+    @GetMapping("/register/doctor")
+    public String doctorFormNoDepartment(@RequestParam("hospital_id") Long hospitalId
+            , @RequestParam("department_name") String departmentName, Model model) {
+
+        model.addAttribute("hospitalId", hospitalId);
+        model.addAttribute("departmentName", departmentName);
+        model.addAttribute("doctorForm",new DoctorForm());
+        return "doctor/doctorForm";
     }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+  <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+  <div class="container">
+  <form role="form" th:action="@{/appointment/doctor}" method="post">
+    <div class="form-group">
+      <input type="hidden" name="hospital_id" th:value="${hospitalId}">
+      <input type="hidden" name="department_name" th:value="${departmentName}">
+      <label for="doctor">의사</label>
+      <select name="doctor_id" id="doctor" class="form-control">
+        <option value="">의사 선택</option>
+        <option th:each="doctor : ${doctors}"
+                th:value="${doctor.id}"
+                th:text="${doctor.name}" />
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Next</button>
+  </form>
+  <br/>
+</div> <!-- /container -->
+</body>
+</html>

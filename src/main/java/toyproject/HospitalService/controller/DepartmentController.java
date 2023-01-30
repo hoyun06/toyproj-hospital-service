@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import toyproject.HospitalService.domain.Department;
 import toyproject.HospitalService.domain.Doctor;
 import toyproject.HospitalService.dto.DepartmentForm;
 import toyproject.HospitalService.dto.DoctorForm;
@@ -34,6 +35,21 @@ public class DepartmentController {
         model.addAttribute("departmentName", departmentName);
         model.addAttribute("doctorForm", new DoctorForm());
         return "doctor/doctorForm";
+    }
+
+    @GetMapping("/register/department")
+    public String departmentFormNoHospital(@RequestParam("hospital_id") Long hospitalId, Model model) {
+        model.addAttribute("hospitalId", hospitalId);
+        model.addAttribute("departmentForm", new DepartmentForm());
+        return "department/departmentForm";
+    }
+    @GetMapping("/register/department_doctor")
+    public String departmentOption(@RequestParam("hospital_id") Long hospitalId, Model model) {
+        List<Department> departments = departmentService.findDepartmentsByHospitalId(hospitalId);
+
+        model.addAttribute("hospitalId", hospitalId);
+        model.addAttribute("departments", departments);
+        return "department/departmentOption";
     }
 
     @GetMapping("/department/detail")

@@ -30,6 +30,20 @@ public class HospitalController {
         return "hospital/hospitalForm";
     }
 
+    @GetMapping("/hospital/option/department")
+    public String hospitalOptionForDepartment(Model model) {
+        List<Hospital> hospitals = hospitalService.getAllHospitals();
+        model.addAttribute("hospitals", hospitals);
+        return "hospital/hospitalOptionForDepartment";
+    }
+
+    @GetMapping("/hospital/option/doctor")
+    public String hospitalOptionForDoctor(Model model) {
+        List<Hospital> hospitals = hospitalService.getAllHospitals();
+        model.addAttribute("hospitals", hospitals);
+        return "hospital/hospitalOptionForDoctor";
+    }
+
     @PostMapping("/register/hospital")
     public String newHospital(@Valid HospitalForm hospitalForm, BindingResult result, Model model) {
         if(result.hasErrors())
@@ -53,6 +67,7 @@ public class HospitalController {
     public String hospitalList(Model model, @RequestParam("hospital_id") Long hospitalId) {
         List<Department> departments = departmentService.findDepartmentsByHospitalId(hospitalId);
         model.addAttribute("departments", departments);
+        model.addAttribute("hospitalId", hospitalId);
         return "department/departmentList";
     }
 }
