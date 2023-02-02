@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import toyproject.HospitalService.domain.*;
 import toyproject.HospitalService.repository.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -19,13 +20,13 @@ public class AppointmentService {
     private final PatientRepository patientRepository;
     private final AppointmentRepository appointmentRepository;
 
-    public Long addAppointment(Long hospitalId, String departmentName, Long doctorId, Long patientId) {
+    public Long addAppointment(Long hospitalId, String departmentName, Long doctorId, Long patientId, LocalDate date) {
         Hospital findHospital = hospitalRepository.findOne(hospitalId);
         Department findDepartment = departmentRepository.findOne(departmentName);
         Doctor findDoctor = doctorRepository.findOne(doctorId);
         Patient findPatient = patientRepository.findOne(patientId);
 
-        Appointment appointment = Appointment.createAppointment(findHospital, findDepartment, findDoctor, findPatient);
+        Appointment appointment = Appointment.createAppointment(findHospital, findDepartment, findDoctor, findPatient, date);
 
         appointmentRepository.save(appointment);
 

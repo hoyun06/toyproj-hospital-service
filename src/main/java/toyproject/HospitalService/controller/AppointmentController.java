@@ -1,6 +1,7 @@
 package toyproject.HospitalService.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import toyproject.HospitalService.domain.*;
 import toyproject.HospitalService.dto.AppointmentForm;
 import toyproject.HospitalService.service.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -67,10 +69,11 @@ public class AppointmentController {
 
     @PostMapping("/appointment/patient")
     public String completePatient(@RequestParam("hospital_id") Long hospitalId
-            ,@RequestParam("department_name") String name
-            ,@RequestParam("doctor_id") Long doctorId
-            ,@RequestParam("patient_id") Long patientId, Model model) {
-        Long appointmentId = appointmentService.addAppointment(hospitalId, name, doctorId, patientId);
+            , @RequestParam("department_name") String name
+            , @RequestParam("doctor_id") Long doctorId
+            , @RequestParam("patient_id") Long patientId
+            , @RequestParam("appointment_time") @DateTimeFormat(pattern = "yyyy-mm-dd")LocalDate date, Model model) {
+        Long appointmentId = appointmentService.addAppointment(hospitalId, name, doctorId, patientId, date);
 
         List<Appointment> appointments = appointmentService.findAppointmentsByPatient(patientId);
 

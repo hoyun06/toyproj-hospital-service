@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,7 +33,7 @@ public class Appointment {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    private LocalDateTime appointmentTime;
+    private LocalDate appointmentTime;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus appointmentStatus;
@@ -49,14 +50,14 @@ public class Appointment {
     }
 
     protected Appointment () {}
-    public static Appointment createAppointment(Hospital hospital, Department department, Doctor doctor, Patient patient) {
+    public static Appointment createAppointment(Hospital hospital, Department department, Doctor doctor, Patient patient, LocalDate date) {
         Appointment appointment = new Appointment();
         appointment.setHospital(hospital);
         appointment.setDepartment(department);
         appointment.addDoctor(doctor);
         appointment.addPatient(patient);
         appointment.setAppointmentStatus(AppointmentStatus.BOOKED);
-        appointment.setAppointmentTime(LocalDateTime.now());
+        appointment.setAppointmentTime(date);
         appointment.setPrice(10000);
 
         return appointment;
