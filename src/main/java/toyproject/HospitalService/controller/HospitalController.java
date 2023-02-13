@@ -70,4 +70,33 @@ public class HospitalController {
         model.addAttribute("hospitalId", hospitalId);
         return "department/departmentList";
     }
+
+    @GetMapping("/hospital/modify")
+    public String hospitalModifyForm(@RequestParam("hospital_id") Long hospitalId, Model model) {
+        Hospital hospital = hospitalService.getOneHospital(hospitalId);
+        HospitalForm hospitalForm = new HospitalForm();
+        hospitalForm.setName(hospital.getName());
+        hospitalForm.setCity(hospital.getAddress().getCity());
+        hospitalForm.setStreet(hospital.getAddress().getStreet());
+        hospitalForm.setZipcode(hospital.getAddress().getZipcode());
+
+        model.addAttribute("hospitalId", hospitalId);
+        model.addAttribute("hospitalForm", hospitalForm);
+        return "hospital/hospitalModifyForm";
+    }
+
+    @PostMapping("/hospital/modify")
+    public String updateHospital(HospitalForm hospitalForm, @RequestParam("hospital_id") Long hospitalId) {
+        Hospital hospital = new Hospital(hospitalForm.getName(), hospitalForm.getCity(), hospitalForm.getStreet(), hospitalForm.getZipcode());
+        hospital.changeHospitalIdUpdatePurpose(hospitalId);
+
+        hospitalService.updateHospital(hospital);
+        return "redirect:/hospital/list";
+    }
+
+    @GetMapping("/hospital/delete")
+    public String hospitalDelete(@RequestParam("hospital_id") Long id) {
+        hospitalService.deleteHospital(id);
+        return "redirect:/hospital/list";
+    }
 }

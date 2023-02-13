@@ -18,20 +18,34 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
+//        http
+//                .authorizeHttpRequests((requests) -> requests
+//                        .requestMatchers("/", "/css/**", "/user/join").permitAll()
+//                        .anyRequest().authenticated()
+//                )
+//                .formLogin((form) -> form
+//                        .loginPage("/login")
+//                        .permitAll()
+//                )
+//                .logout((logout) -> logout
+//                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                        .permitAll()
+//                        .logoutSuccessUrl("/")
+//                        .invalidateHttpSession(true));
         http
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/css/**", "/user/join").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll()
-                )
-                .logout((logout) -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .permitAll()
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true));
+                .authorizeHttpRequests()
+                .requestMatchers("/", "/css/**", "/user/join").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .permitAll()
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true);
 
         return http.build();
     }

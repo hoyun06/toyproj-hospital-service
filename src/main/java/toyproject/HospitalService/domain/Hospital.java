@@ -22,8 +22,17 @@ public class Hospital {
     @Embedded
     private Address address = new Address();
 
-    @OneToMany(mappedBy = "hospital")
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.REMOVE)
     private List<Department> departments = new ArrayList<>();
+
+    public void changeHospital(String name, Address address) {
+        this.setName(name);
+        this.setAddress(address);
+    }
+
+    public void changeHospitalIdUpdatePurpose(Long id) {
+        this.setId(id);
+    }
 
     protected Hospital() {}
 

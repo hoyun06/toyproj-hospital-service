@@ -20,6 +20,16 @@ public class PatientService {
         return patient.getId();
     }
 
+    public Long updatePatient(Patient patient) {
+        Patient findPatient = patientRepository.findOne(patient.getId());
+        findPatient.changePatient(patient.getAge(), patient.getName(), patient.getGender());
+        return findPatient.getId();
+    }
+
+    public Long deletePatient(Long patientId) {
+        patientRepository.remove(patientId);
+        return patientId;
+    }
     public Patient findOnePatient(Long id) {
         return patientRepository.findOne(id);
     }

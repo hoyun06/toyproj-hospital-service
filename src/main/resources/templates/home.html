@@ -5,26 +5,26 @@
 <body>
     <main>
         <div th:replace = "fragments/bodyHeader :: bodyHeader"> </div>
-        <div class="position-absolute top-50 start-50 translate-middle mt-5">
+        <div class="position-absolute top-50 start-50 translate-middle mt-4">
             <h1>병원 진료 예약 페이지</h1>
-            <p class="lead" align="center">환자 기능</p>
+            <p class="lead" align="center">환자 기능</p> 
             <p align="center">
-                <a class="btn btn-lg btn-secondary" href="/patient/new">환자 등록</a>
-                <a class="btn btn-lg btn-secondary" href="/patient/list">환자 목록</a>
+                <a class="btn btn-lg btn-secondary" th:href="@{/patient/new}" >환자 등록</a>
+                <a class="btn btn-lg btn-secondary" th:href="@{/patient/list}">환자 목록</a>
             </p>
             <p class="lead" align="center">등록 기능</p>
             <p align="center">
-                <a class="btn btn-lg btn-dark" href="/register/hospital">병원 등록</a>
-                <a class="btn btn-lg btn-dark" href="/hospital/list">병원 목록</a>
+                <a class="btn btn-lg btn-dark" th:href="@{/register/hospital}">병원 등록</a>
+                <a class="btn btn-lg btn-dark" th:href="@{/hospital/list}">병원 목록</a>
             </p>
             <p align="center">
-                <a class="btn btn-lg btn-primary" href="/hospital/option/department">진료과 등록</a>
-                <a class="btn btn-lg btn-primary" href="/hospital/option/doctor">의사 등록</a>
+                <a class="btn btn-lg btn-primary" th:href="@{/hospital/option/department}">진료과 등록</a>
+                <a class="btn btn-lg btn-primary" th:href="@{/hospital/option/doctor}">의사 등록</a>
             </p>
             <p class="lead" align="center">예약 기능</p>
             <p align="center">
-                <a class="btn btn-lg btn-info" href="/appointment/hospital">진료 예약</a>
-                <a class="btn btn-lg btn-info" href="/appointment/list">예약 내역</a>
+                <a class="btn btn-lg btn-info" th:href="@{/appointment/hospital}">진료 예약</a>
+                <a class="btn btn-lg btn-info" th:href="@{/appointment/list}">예약 내역</a>
             </p>
         </div>
     </main>

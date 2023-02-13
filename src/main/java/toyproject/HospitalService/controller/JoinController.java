@@ -37,6 +37,12 @@ public class JoinController {
             return "user/join";
         }
 
+        Optional<AccountUser> userByEmail = userService.findUserByEmail(userForm.getEmail());
+        if(userByEmail.isPresent()) {
+            result.rejectValue("email", "existingUserEmail", "이미 존재하는 이메일입니다.");
+            return "user/join";
+        }
+
         if(!userForm.getPassword1().equals(userForm.getPassword2())) {
             result.rejectValue("password2", "passwordIncorrect"
                     , "두 비밀번호가 일치하지 않습니다.");

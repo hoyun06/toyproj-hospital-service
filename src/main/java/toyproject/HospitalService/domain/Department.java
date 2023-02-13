@@ -22,7 +22,7 @@ public class Department {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
     private List<Doctor> doctors = new ArrayList<>();
 
     protected Department() {}

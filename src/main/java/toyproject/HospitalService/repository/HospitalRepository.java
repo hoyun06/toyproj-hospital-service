@@ -17,6 +17,11 @@ public class HospitalRepository {
         em.persist(hospital);
     }
 
+    public void remove(Long id) {
+        Hospital hospital = em.find(Hospital.class, id);
+        em.remove(hospital);
+    }
+
     public Hospital findOne(Long id) {
         return em.find(Hospital.class, id);
     }

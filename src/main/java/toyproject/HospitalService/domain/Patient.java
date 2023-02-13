@@ -1,13 +1,15 @@
 package toyproject.HospitalService.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter(AccessLevel.PRIVATE)
 public class Patient {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +29,14 @@ public class Patient {
         this.gender = gender;
     }
 
+    public void changePatient(int age, String name, String gender) {
+        this.setAge(age);
+        this.setName(name);
+        this.setGender(gender);
+    }
+
+    public void changePatientIdUpdatePurpose(Long id) {
+        this.setId(id);
+    }
     protected Patient() { }
 }

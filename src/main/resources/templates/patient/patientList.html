@@ -11,6 +11,7 @@
                 <th>이름</th>
                 <th>나이</th>
                 <th>성별</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +20,12 @@
                 <td th:text="${patient.name}"></td>
                 <td th:text="${patient.age}"></td>
                 <td th:text="${patient.gender}"></td>
+                <td>
+                    <p>
+                        <a class="btn btn-lg btn-primary" th:href="@{/patient/modify(patient_id = ${patient.id})}">수정</a>
+                        <a class="btn btn-lg btn-danger" th:href="@{/patient/delete(patient_id = ${patient.id})}">삭제</a>
+                    </p>
+                </td>
             </tr>
             </tbody>
         </table>

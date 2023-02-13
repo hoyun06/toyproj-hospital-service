@@ -20,6 +20,17 @@ public class HospitalService {
         return hospital.getId();
     }
 
+    public Long updateHospital(Hospital hospital) {
+        Hospital findHospital = hospitalRepository.findOne(hospital.getId());
+        findHospital.changeHospital(hospital.getName(), hospital.getAddress());
+        return findHospital.getId();
+    }
+
+    public Long deleteHospital(Long id) {
+        hospitalRepository.remove(id);
+        return id;
+    }
+
     public Hospital getOneHospital(Long id) {
         return hospitalRepository.findOne(id);
     }
