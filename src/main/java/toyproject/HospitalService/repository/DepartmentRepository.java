@@ -17,8 +17,13 @@ public class DepartmentRepository {
         em.persist(department);
     }
 
-    public Department findOne(String name) {
-        return em.find(Department.class, name);
+    public Department findOne(Long id) {
+        return em.find(Department.class, id);
+    }
+
+    public void remove(Long departmentId) {
+        Department department = em.find(Department.class, departmentId);
+        em.remove(department);
     }
 
     public List<Department> findAll() {

@@ -17,6 +17,11 @@ public class DoctorRepository {
         em.persist(doctor);
     }
 
+    public void remove(Long doctorId) {
+        Doctor doctor = em.find(Doctor.class, doctorId);
+        em.remove(doctor);
+    }
+
     public Doctor findOne(Long id) {
         return em.find(Doctor.class, id);
     }
@@ -26,9 +31,9 @@ public class DoctorRepository {
                 .getResultList();
     }
 
-    public List<Doctor> findByDepartmentName(String name) {
-        return em.createQuery("select d from Doctor d where d.department.name = :name", Doctor.class)
-                .setParameter("name", name)
+    public List<Doctor> findByDepartmentId(Long id) {
+        return em.createQuery("select d from Doctor d where d.department.id = :id", Doctor.class)
+                .setParameter("id", id)
                 .getResultList();
     }
 }

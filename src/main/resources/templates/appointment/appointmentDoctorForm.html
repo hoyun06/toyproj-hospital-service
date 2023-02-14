@@ -7,7 +7,7 @@
   <form role="form" th:action="@{/appointment/doctor}" method="post">
     <div class="form-group">
       <input type="hidden" name="hospital_id" th:value="${hospitalId}">
-      <input type="hidden" name="department_name" th:value="${departmentName}">
+      <input type="hidden" name="department_id" th:value="${departmentId}">
       <label for="doctor">의사</label>
       <select name="doctor_id" id="doctor" class="form-control">
         <option value="">의사 선택</option>

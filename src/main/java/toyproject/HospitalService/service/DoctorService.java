@@ -22,14 +22,25 @@ public class DoctorService {
     private final DepartmentRepository departmentRepository;
 
 
-    public Long addDoctor(Long hospitalId, String departmentName, String name, int workYear) {
+    public Long addDoctor(Long hospitalId, Long departmentId, String name, int workYear) {
         Hospital findHospital = hospitalRepository.findOne(hospitalId);
-        Department findDepartment = departmentRepository.findOne(departmentName);
+        Department findDepartment = departmentRepository.findOne(departmentId);
 
         Doctor doctor = Doctor.createDoctor(findDepartment, findHospital, name, workYear);
 
         doctorRepository.save(doctor);
         return doctor.getId();
+    }
+
+    public Long updateDoctor(Doctor doctor, Long doctorId) {
+        Doctor findDoctor = doctorRepository.findOne(doctorId);
+        findDoctor.changeDoctor(doctor.getName(), doctor.getWorkYear());
+        return doctorId;
+    }
+
+    public Long deleteDoctor(Long doctorId) {
+        doctorRepository.remove(doctorId);
+        return doctorId;
     }
 
     public Doctor findOneDoctor(Long id) {
@@ -40,7 +51,7 @@ public class DoctorService {
         return doctorRepository.findAll();
     }
 
-    public List<Doctor> findDoctorsByDepartmentName(String name) {
-        return doctorRepository.findByDepartmentName(name);
+    public List<Doctor> findDoctorsByDepartmentId(Long id) {
+        return doctorRepository.findByDepartmentId(id);
     }
 }

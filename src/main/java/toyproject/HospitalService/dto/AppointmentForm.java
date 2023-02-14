@@ -7,7 +7,7 @@ import lombok.Setter;
 public class AppointmentForm {
 
     private Long hospitalId;
-    private String departmentName;
+    private Long departmentId;
     private Long doctorId;
     private Long patientId;
 }

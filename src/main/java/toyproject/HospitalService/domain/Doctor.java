@@ -31,12 +31,21 @@ public class Doctor {
     private String name;
     private int workYear;
 
-    protected Doctor() {}
+
+    public void changeDoctor(String name, int workYear) {
+        this.setName(name);
+        this.setWorkYear(workYear);
+    }
+
+    public void changeDoctorIdUpdatePurpose(Long id) {
+        this.setId(id);
+    }
 
     public void addDepartment(Department department) {
         this.setDepartment(department);
         department.getDoctors().add(this);
     }
+    public Doctor() {}
     public static Doctor createDoctor(Department department, Hospital hospital, String name, int workYear) {
         Doctor doctor = new Doctor();
         doctor.addDepartment(department);

@@ -10,13 +10,20 @@
       <th>진료과 이름</th>
       <th>전화 번호</th>
       <th>소속 의사</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="department : ${departments}">
       <td th:text="${department.name}"></td>
       <td th:text="${department.tel}"></td>
-      <td><a th:href="@{/department/detail(department_name = ${department.name})}">소속 의사 명단</a></td>
+      <td><a th:href="@{/department/detail(department_id = ${department.id})}">소속 의사 명단</a></td>
+      <td>
+        <p>
+          <a class="btn btn-primary" th:href="@{/department/modify(department_id = ${department.id})}">수정</a>
+          <a class="btn btn-danger" th:href="@{/department/delete(department_id = ${department.id})}">삭제</a>
+        </p>
+      </td>
     </tr>
     </tbody>
   </table>

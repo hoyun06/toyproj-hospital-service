@@ -20,8 +20,8 @@
         <td><span th:text = "${hospital.address.city}"></span><span th:text = "' ' + ${hospital.address.street}"></span><span th:text = "' ' + ${hospital.address.zipcode}"></span></td>
         <td>
           <p>
-            <a class="btn btn-lg btn-primary" th:href="@{/hospital/modify(hospital_id = ${hospital.id})}">수정</a>
-            <a class="btn btn-lg btn-danger" th:href="@{/hospital/delete(hospital_id = ${hospital.id})}">삭제</a>
+            <a class="btn btn-primary" th:href="@{/hospital/modify(hospital_id = ${hospital.id})}">수정</a>
+            <a class="btn btn-danger" th:href="@{/hospital/delete(hospital_id = ${hospital.id})}">삭제</a>
           </p>
         </td>
       </tr>

@@ -8,10 +8,10 @@
     <div class="form-group">
       <input type="hidden" name= "hospital_id" th:value="${hospitalId}">
       <label for="department">진료과</label>
-      <select name="department_name" id="department" class="form-control">
+      <select name="department_id" id="department" class="form-control">
         <option value="">진료과 선택</option>
         <option th:each="department : ${departments}"
-                th:value="${department.name}"
+                th:value="${department.id}"
                 th:text="${department.name}" />
       </select>
     </div>

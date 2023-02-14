@@ -43,25 +43,25 @@ public class AppointmentController {
 
     @PostMapping("/appointment/department")
     public String completeDepartment(@RequestParam("hospital_id") Long hospitalId
-            ,@RequestParam("department_name") String name, Model model) {
+            ,@RequestParam("department_id") Long departmentId, Model model) {
 
-        List<Doctor> doctors = doctorService.findDoctorsByDepartmentName(name);
+        List<Doctor> doctors = doctorService.findDoctorsByDepartmentId(departmentId);
 
         model.addAttribute("hospitalId", hospitalId);
-        model.addAttribute("departmentName", name);
+        model.addAttribute("departmentId", departmentId);
         model.addAttribute("doctors", doctors);
         return "appointment/appointmentDoctorForm";
     }
 
     @PostMapping("/appointment/doctor")
     public String completeDoctor(@RequestParam("hospital_id") Long hospitalId
-            ,@RequestParam("department_name") String name
+            ,@RequestParam("department_id") Long departmentId
             ,@RequestParam("doctor_id") Long doctorId, Model model) {
 
         List<Patient> patients = patientService.findAllPatients();
 
         model.addAttribute("hospitalId", hospitalId);
-        model.addAttribute("departmentName", name);
+        model.addAttribute("departmentId", departmentId);
         model.addAttribute("doctorId", doctorId);
         model.addAttribute("patients", patients);
         return "appointment/appointmentPatientForm";
@@ -69,11 +69,11 @@ public class AppointmentController {
 
     @PostMapping("/appointment/patient")
     public String completePatient(@RequestParam("hospital_id") Long hospitalId
-            , @RequestParam("department_name") String name
+            , @RequestParam("department_id") Long departmentId
             , @RequestParam("doctor_id") Long doctorId
             , @RequestParam("patient_id") Long patientId
             , @RequestParam("appointment_time") @DateTimeFormat(pattern = "yyyy-mm-dd")LocalDate date, Model model) {
-        Long appointmentId = appointmentService.addAppointment(hospitalId, name, doctorId, patientId, date);
+        Long appointmentId = appointmentService.addAppointment(hospitalId, departmentId, doctorId, patientId, date);
 
         List<Appointment> appointments = appointmentService.findAppointmentsByPatient(patientId);
 

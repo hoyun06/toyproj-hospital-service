@@ -20,9 +20,9 @@ public class AppointmentService {
     private final PatientRepository patientRepository;
     private final AppointmentRepository appointmentRepository;
 
-    public Long addAppointment(Long hospitalId, String departmentName, Long doctorId, Long patientId, LocalDate date) {
+    public Long addAppointment(Long hospitalId, Long departmentId, Long doctorId, Long patientId, LocalDate date) {
         Hospital findHospital = hospitalRepository.findOne(hospitalId);
-        Department findDepartment = departmentRepository.findOne(departmentName);
+        Department findDepartment = departmentRepository.findOne(departmentId);
         Doctor findDoctor = doctorRepository.findOne(doctorId);
         Patient findPatient = patientRepository.findOne(patientId);
 

@@ -30,9 +30,9 @@ public class DepartmentController {
         if(result.hasErrors())
             return "department/departmentForm";
 
-        String departmentName = departmentService.addDepartment(hospitalId, departmentForm.getName(), departmentForm.getTel());
+        Long departmentId = departmentService.addDepartment(hospitalId, departmentForm.getName(), departmentForm.getTel());
         model.addAttribute("hospitalId", hospitalId);
-        model.addAttribute("departmentName", departmentName);
+        model.addAttribute("departmentId", departmentId);
         model.addAttribute("doctorForm", new DoctorForm());
         return "doctor/doctorForm";
     }
@@ -53,9 +53,37 @@ public class DepartmentController {
     }
 
     @GetMapping("/department/detail")
-    public String departmentList(Model model, @RequestParam("department_name") String name) {
-        List<Doctor> doctors = doctorService.findDoctorsByDepartmentName(name);
+    public String departmentList(Model model, @RequestParam("department_id") Long departmentId) {
+        List<Doctor> doctors = doctorService.findDoctorsByDepartmentId(departmentId);
         model.addAttribute("doctors", doctors);
         return "doctor/doctorList";
+    }
+
+    @GetMapping("/department/modify")
+    public String departmentModifyForm(@RequestParam("department_id") Long departmentId, Model model) {
+        Department findDepartment = departmentService.findOneDepartment(departmentId);
+
+        DepartmentForm departmentForm = new DepartmentForm();
+        departmentForm.setName(findDepartment.getName());
+        departmentForm.setTel(findDepartment.getTel());
+
+        model.addAttribute("departmentForm",departmentForm);
+        model.addAttribute("departmentId", departmentId);
+        return "department/departmentModifyForm";
+    }
+
+    @PostMapping("/department/modify")
+    public String updateDepartment(DepartmentForm departmentForm, @RequestParam("department_id") Long departmentId) {
+        Department department = new Department();
+        department.changeDepartment(departmentForm.getName(), departmentForm.getTel());
+        department.changeDepartmentIdUpdatePurpose(departmentId);
+        departmentService.updateDepartment(department);
+        return "redirect:/hospital/list";
+    }
+
+    @GetMapping("/department/delete")
+    public String departmentDelete(@RequestParam("department_id") Long id) {
+        departmentService.deleteDepartment(id);
+        return "redirect:/hospital/list";
     }
 }

@@ -12,8 +12,10 @@ import java.util.List;
 @Getter @Setter(AccessLevel.PRIVATE)
 public class Department {
 
-    @Id
-    @Column(name = "department_name")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "department_id")
+    private Long id;
+
     private String name;
 
     private String tel;
@@ -25,13 +27,21 @@ public class Department {
     @OneToMany(mappedBy = "department", cascade = CascadeType.REMOVE)
     private List<Doctor> doctors = new ArrayList<>();
 
-    protected Department() {}
 
     public void addHospital(Hospital hospital) {
         this.setHospital(hospital);
         hospital.getDepartments().add(this);
     }
 
+    public void changeDepartment(String name, String tel) {
+        this.setName(name);
+        this.setTel(tel);
+    }
+
+    public void changeDepartmentIdUpdatePurpose(Long id) {
+        this.setId(id);
+    }
+    public Department() {}
     public static Department createDepartment(Hospital hospital, String name, String tel) {
         Department department = new Department();
         department.addHospital(hospital);

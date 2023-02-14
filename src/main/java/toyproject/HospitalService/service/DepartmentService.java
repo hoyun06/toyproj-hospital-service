@@ -18,15 +18,25 @@ public class DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final HospitalRepository hospitalRepository;
 
-    public String addDepartment(Long hospitalId, String name, String tel) {
+    public Long addDepartment(Long hospitalId, String name, String tel) {
         Hospital findHospital = hospitalRepository.findOne(hospitalId);
         Department department = Department.createDepartment(findHospital, name, tel);
         departmentRepository.save(department);
-        return department.getName();
+        return department.getId();
     }
 
-    public Department findOneDepartment(String name) {
-        return departmentRepository.findOne(name);
+    public Long updateDepartment(Department department) {
+        Department findDepartment = departmentRepository.findOne(department.getId());
+        findDepartment.changeDepartment(department.getName(), department.getTel());
+        return department.getId();
+    }
+
+    public Long deleteDepartment(Long departmentId) {
+        departmentRepository.remove(departmentId);
+        return departmentId;
+    }
+    public Department findOneDepartment(Long id) {
+        return departmentRepository.findOne(id);
     }
 
     public List<Department> findAllDepartments() {
